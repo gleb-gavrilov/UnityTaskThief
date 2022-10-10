@@ -47,7 +47,6 @@ public class Move : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _isAvailableJump)
         {
             DisableRunAnimation();
-            EnableJumpAnimation();
             Jump();
         } 
     }
@@ -68,6 +67,7 @@ public class Move : MonoBehaviour
 
     private void Jump()
     {
+        EnableJumpAnimation();
         _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 }
