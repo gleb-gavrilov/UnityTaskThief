@@ -5,13 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-
+ 
 public class Move : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Transform _groundChek;
+
+    private const string IsRun = "isRun";
+    private const string Bounce = "Jump";
 
     private Animator _animator;
     private Rigidbody2D _rigidBody;
@@ -53,16 +56,16 @@ public class Move : MonoBehaviour
 
     private void EnableRunAnimation()
     {
-        _animator.SetBool("isRun", true);
+        _animator.SetBool(IsRun, true);
     }
 
     private void DisableRunAnimation()
     {
-        _animator.SetBool("isRun", false);
+        _animator.SetBool(IsRun, false);
     }
     private void EnableJumpAnimation()
     {
-        _animator.SetTrigger("Jump");
+        _animator.SetTrigger(Bounce);
     }
 
     private void Jump()
