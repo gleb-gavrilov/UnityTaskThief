@@ -69,5 +69,4 @@ public class Alarm : MonoBehaviour
             yield return null;
         }
     }
-
 }

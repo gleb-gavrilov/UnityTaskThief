@@ -28,6 +28,7 @@ public class Move : MonoBehaviour
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     private void Update()
     {
         DisableRunAnimation();
