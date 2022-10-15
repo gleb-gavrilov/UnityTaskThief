@@ -11,12 +11,12 @@ public class EntryThief : MonoBehaviour
     {
         _openDoor.SetActive(true);
         _alarm.Play();
-        _alarm.ChangeVolume(1f, AlarmAction.Increase);
+        _alarm.ChangeVolume(AlarmAction.Increase);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         _openDoor.SetActive(false);
-        _alarm.ChangeVolume(0f, AlarmAction.Decrease);
+        _alarm.ChangeVolume(AlarmAction.Decrease);
     }
 }

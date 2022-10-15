@@ -7,8 +7,8 @@ public class Alarm : MonoBehaviour
 {
     [SerializeField] private int _fluencySound;
     
-    private float _maxSoundValue = 0.99f;
-    private float _minSoundValue = 0.01f;
+    private float _maxSoundValue = 1;
+    private float _minSoundValue = 0;
     private Coroutine _changeVolume;
     private AudioSource _audioSource;
 
@@ -17,25 +17,25 @@ public class Alarm : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    public void ChangeVolume(float target, AlarmAction alarmAction)
+    public void ChangeVolume(AlarmAction alarmAction)
     {
         if (_changeVolume != null && alarmAction == AlarmAction.Decrease)
         {
             StopCoroutine(_changeVolume);
-            _changeVolume = StartCoroutine(DecreaseVolume(target));
+            _changeVolume = StartCoroutine(DecreaseVolume(_minSoundValue));
         }
         else if (_changeVolume == null && alarmAction == AlarmAction.Decrease)
         {
-            _changeVolume = StartCoroutine(DecreaseVolume(target));
+            _changeVolume = StartCoroutine(DecreaseVolume(_minSoundValue));
         }
         else if (_changeVolume != null && alarmAction == AlarmAction.Increase)
         {
             StopCoroutine(_changeVolume);
-            _changeVolume = StartCoroutine(IncreaseVolume(target));
+            _changeVolume = StartCoroutine(IncreaseVolume(_maxSoundValue));
         }
         else if (_changeVolume == null && alarmAction == AlarmAction.Increase)
         {
-            _changeVolume = StartCoroutine(IncreaseVolume(target));
+            _changeVolume = StartCoroutine(IncreaseVolume(_maxSoundValue));
         }
     }
 
@@ -51,7 +51,7 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator DecreaseVolume(float target)
     {
-        while (_audioSource.volume >= _minSoundValue)
+        while (_audioSource.volume > target)
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, target, Time.deltaTime / _fluencySound);
             yield return null;
@@ -62,8 +62,7 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator IncreaseVolume(float target)
     {
-        
-        while (_audioSource.volume <= _maxSoundValue)
+        while (_audioSource.volume < target)
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, target, Time.deltaTime / _fluencySound);
             yield return null;
