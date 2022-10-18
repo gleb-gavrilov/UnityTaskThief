@@ -1834,7 +1834,7 @@ GameObject:
   - component: {fileID: 401947869}
   - component: {fileID: 401947868}
   m_Layer: 0
-  m_Name: OpenDoor
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2565,7 +2565,7 @@ GameObject:
   - component: {fileID: 1833472337}
   - component: {fileID: 1833472336}
   m_Layer: 0
-  m_Name: ThiefZone
+  m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2624,7 +2624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a19e20919743d47832e6b124c69027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _openDoor: {fileID: 401947867}
+  _door: {fileID: 401947867}
   _alarm: {fileID: 501072348}
 --- !u!114 &1833472336
 MonoBehaviour:

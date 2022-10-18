@@ -22,20 +22,20 @@ public class Alarm : MonoBehaviour
         if (_changeVolume != null && alarmAction == AlarmAction.Decrease)
         {
             StopCoroutine(_changeVolume);
-            _changeVolume = StartCoroutine(DecreaseVolume(_minSoundValue));
+            _changeVolume = StartCoroutine(SetVolume(_minSoundValue));
         }
         else if (_changeVolume == null && alarmAction == AlarmAction.Decrease)
         {
-            _changeVolume = StartCoroutine(DecreaseVolume(_minSoundValue));
+            _changeVolume = StartCoroutine(SetVolume(_minSoundValue));
         }
         else if (_changeVolume != null && alarmAction == AlarmAction.Increase)
         {
             StopCoroutine(_changeVolume);
-            _changeVolume = StartCoroutine(IncreaseVolume(_maxSoundValue));
+            _changeVolume = StartCoroutine(SetVolume(_maxSoundValue));
         }
         else if (_changeVolume == null && alarmAction == AlarmAction.Increase)
         {
-            _changeVolume = StartCoroutine(IncreaseVolume(_maxSoundValue));
+            _changeVolume = StartCoroutine(SetVolume(_maxSoundValue));
         }
     }
 
@@ -66,6 +66,20 @@ public class Alarm : MonoBehaviour
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, target, Time.deltaTime / _fluencySound);
             yield return null;
+        }
+    }
+
+    private IEnumerator SetVolume(float target)
+    {
+        while (_audioSource.volume != target)
+        {
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, target, Time.deltaTime / _fluencySound);
+            yield return null;
+        }
+
+        if (target == _minSoundValue)
+        {
+            Stop();
         }
     }
 }
